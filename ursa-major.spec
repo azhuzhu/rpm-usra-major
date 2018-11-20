@@ -6,7 +6,7 @@
 
 Name:       ursa-major
 Version:    0.1.1
-Release:    1%{?dist}
+Release:    2%{?dist}
 Summary:    A utility for working with module's koji tags in koji's tag inheritance.
 
 Group:      Development/Tools
@@ -14,7 +14,9 @@ License:    MIT
 URL:        https://pagure.io/ursa-major
 Source0:    https://files.pythonhosted.org/packages/source/u/%{name}/%{name}-%{version}.tar.gz
 
-BuildArch:    noarch
+BuildArch:      noarch
+# libmodulemd is not available for ppc or i686
+ExclusiveArch:  noarch aarch64 ppc64le s390x x86_64
 
 
 BuildRequires:  help2man
@@ -35,7 +37,6 @@ BuildRequires:  python3-mock
 %else
 BuildRequires:  python2-devel
 BuildRequires:  python2-koji
-BuildRequires:  python2-psutil
 %if 0%{?rhel} && 0%{?rhel} <= 7
 BuildRequires:  python-setuptools
 BuildRequires:  python-gobject-base
@@ -64,7 +65,6 @@ Requires:       krb5-workstation
 Requires:       koji
 Requires:       libmodulemd
 Requires:       m2crypto
-Requires:       fedora-packager
 
 %if 0%{?with_python3}
 Requires:       python3-gobject-base
@@ -73,10 +73,8 @@ Requires:       python3-koji
 Requires:       python3-six
 Requires:       python3-requests
 Requires:       python3-jinja2
-Requires:       python3-psutil
 %else
 Requires:       python2-koji
-Requires:       python2-psutil
 %if 0%{?rhel} && 0%{?rhel} <= 7
 Requires:       python-gobject-base
 Requires:       pycairo
@@ -179,5 +177,8 @@ py.test
 
 
 %changelog
+* Fri Nov 16 2018 Qixiang Wan <qwan@redhat.com> - 0.1.1-2
+- Limit build arches as libmodulemd is not available for ppc or i686
+
 * Fri Oct 26 2018 Qixiang Wan <qwan@redhat.com> - 0.1.1-1
 - Initial version of spec file
