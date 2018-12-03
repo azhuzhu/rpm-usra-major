@@ -6,7 +6,7 @@
 
 Name:       ursa-major
 Version:    0.1.1
-Release:    3%{?dist}
+Release:    4%{?dist}
 Summary:    A utility for working with module's koji tags in koji's tag inheritance
 
 Group:      Development/Tools
@@ -15,9 +15,10 @@ URL:        https://pagure.io/ursa-major
 Source0:    https://files.pythonhosted.org/packages/source/u/%{name}/%{name}-%{version}.tar.gz
 
 BuildArch:      noarch
-# 1. libmodulemd is not available for ppc or i686
-# 2. seeing libmodulemd is missing from ppc64le buildroot, enable x86_64 only
-ExclusiveArch:  noarch x86_64
+# EPEL:   libmodulemd is not available for ppc or i686
+# Fedora: include ix86 as build can be scheduled to i386 arch, otherwise there is
+# 	  error: Architecture is not included: i386
+ExclusiveArch:  %{ix86} x86_64 noarch
 
 
 BuildRequires:  help2man
@@ -178,8 +179,11 @@ py.test
 
 
 %changelog
+* Mon Dec 03 2018 Qixiang Wan <qwan@redhat.com> - 0.1.1-4
+- build can be scheduled to i386 arch, include %{ix86}
+
 * Mon Dec 03 2018 Qixiang Wan <qwan@redhat.com> - 0.1.1-3
-- libmodulemd is missing from ppc64le buildroot, enable x86_64 only
+- libmodulemd is missing from EPEL ppc64le buildroot, enable x86_64 only
 
 * Fri Nov 16 2018 Qixiang Wan <qwan@redhat.com> - 0.1.1-2
 - Limit build arches as libmodulemd is not available for ppc or i686
