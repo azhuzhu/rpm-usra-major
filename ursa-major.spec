@@ -180,7 +180,7 @@ py.test
 
 %changelog
 * Mon Dec 03 2018 Qixiang Wan <qwan@redhat.com> - 0.1.1-4
-- build can be scheduled to i386 arch, include %{ix86}
+- build can be scheduled to i386 arch, include ix86
 
 * Mon Dec 03 2018 Qixiang Wan <qwan@redhat.com> - 0.1.1-3
 - libmodulemd is missing from EPEL ppc64le buildroot, enable x86_64 only
