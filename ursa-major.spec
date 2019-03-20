@@ -5,8 +5,8 @@
 %endif
 
 Name:       ursa-major
-Version:    0.1.1
-Release:    2%{?dist}
+Version:    0.2.1
+Release:    1%{?dist}
 Summary:    A utility for working with module's koji tags in koji's tag inheritance.
 
 Group:      Development/Tools
@@ -16,7 +16,7 @@ Source0:    https://files.pythonhosted.org/packages/source/u/%{name}/%{name}-%{v
 
 BuildArch:      noarch
 # libmodulemd is not available for ppc or i686
-ExclusiveArch:  noarch aarch64 ppc64le s390x x86_64
+ExcludeArch:    ppc s390 ppc64 i686
 
 
 BuildRequires:  help2man
@@ -142,9 +142,9 @@ export PYTHONPATH=%{buildroot}%{python2_sitelib}
 %endif
 mkdir -p %{buildroot}/%{_mandir}/man1
 
-help2man -N --version-string=%{version} %{buildroot}/%{_bindir}/ursa-major > %{buildroot}/%{_mandir}/man1/ursa-major.1
+help2man -N --no-discard-stderr --version-string=%{version} %{buildroot}/%{_bindir}/ursa-major > %{buildroot}/%{_mandir}/man1/ursa-major.1
 for cmd in show-config check-config remove-module add-module add-tag; do
-    help2man -N --version-string=%{version} "%{buildroot}/%{_bindir}/ursa-major $cmd" > %{buildroot}/%{_mandir}/man1/ursa-major-${cmd}.1
+    help2man -N --no-discard-stderr --version-string=%{version} "%{buildroot}/%{_bindir}/ursa-major $cmd" > %{buildroot}/%{_mandir}/man1/ursa-major-${cmd}.1
 done
 
 
@@ -177,6 +177,21 @@ py.test
 
 
 %changelog
+* Wed Mar 20 2019 Chenxiong Qi <cqi@redhat.com> - 0.2.1-1
+- Make setup_method/teardown_method compatible with newer version of pytest (Chenxiong Qi)
+- Add missing file CHANGELOG.rst to sdist package (Chenxiong Qi)
+
+* Wed Mar 20 2019 Chenxiong Qi <cqi@redhat.com> - 0.2.0-1
+- Add tests for AddModuleHandler methods (Chenxiong Qi)
+- Avoid long modulemd embedded into fake data for tests (Chenxiong Qi)
+- Fixes according to review comments (Chenxiong Qi)
+- Command check-config supports filtering modules on buildrequires (Chenxiong Qi)
+- Command add-module supports buildrequires now (Chenxiong Qi)
+- Command remove-module supports filtering modules on buildrequires (Chenxiong Qi)
+- Allow passing buildrequires to MBS.get_modules_with_requires (Chenxiong Qi)
+- Reword remove-module help and --tag option help text (Chenxiong Qi)
+- Allow filtering on buildrequires (Chenxiong Qi)
+
 * Fri Nov 16 2018 Qixiang Wan <qwan@redhat.com> - 0.1.1-2
 - Limit build arches as libmodulemd is not available for ppc or i686
 
