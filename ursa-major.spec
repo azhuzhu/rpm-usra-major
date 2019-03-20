@@ -20,7 +20,6 @@ ExcludeArch:    ppc s390 ppc64 i686
 
 
 BuildRequires:  help2man
-BuildRequires:  libmodulemd
 
 %if 0%{?with_python3}
 BuildRequires:  python3-devel
@@ -60,10 +59,17 @@ BuildRequires:  python2-mock
 %endif
 %endif
 
+%if 0%{?fedora} || (0%{?rhel} && 0%{?rhel} > 7)
+BuildRequires:  libmodulemd1
+Requires:  libmodulemd1
+%else
+BuildRequires:  libmodulemd
+Requires:  libmodulemd
+%endif
+
 Requires:       gobject-introspection
 Requires:       krb5-workstation
 Requires:       koji
-Requires:       libmodulemd
 Requires:       m2crypto
 
 %if 0%{?with_python3}
