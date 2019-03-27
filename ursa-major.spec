@@ -5,9 +5,9 @@
 %endif
 
 Name:       ursa-major
-Version:    0.1.1
-Release:    4%{?dist}
-Summary:    A utility for working with module's koji tags in koji's tag inheritance
+Version:    0.2.2
+Release:    1%{?dist}
+Summary:    A utility for working with module's koji tags in koji's tag inheritance.
 
 Group:      Development/Tools
 License:    MIT
@@ -22,7 +22,6 @@ ExclusiveArch:  %{ix86} x86_64 noarch
 
 
 BuildRequires:  help2man
-BuildRequires:  libmodulemd
 
 %if 0%{?with_python3}
 BuildRequires:  python3-devel
@@ -62,10 +61,17 @@ BuildRequires:  python2-mock
 %endif
 %endif
 
+%if 0%{?fedora} || (0%{?rhel} && 0%{?rhel} > 7)
+BuildRequires:  libmodulemd1
+Requires:  libmodulemd1
+%else
+BuildRequires:  libmodulemd
+Requires:  libmodulemd
+%endif
+
 Requires:       gobject-introspection
 Requires:       krb5-workstation
 Requires:       koji
-Requires:       libmodulemd
 Requires:       m2crypto
 
 %if 0%{?with_python3}
@@ -101,7 +107,7 @@ in koji's tag inheritance accordingly per the configuration in tag config file.
 
 
 %package        -n ursa-major-stage
-Summary:        A utility for working with module's koji tags in koji's tag inheritance
+Summary:        A utility for working with module's koji tags in koji's tag inheritance.
 Requires:       %{name} = %{version}-%{release}
 
 %description    -n ursa-major-stage
@@ -144,9 +150,9 @@ export PYTHONPATH=%{buildroot}%{python2_sitelib}
 %endif
 mkdir -p %{buildroot}/%{_mandir}/man1
 
-help2man -N --version-string=%{version} %{buildroot}/%{_bindir}/ursa-major > %{buildroot}/%{_mandir}/man1/ursa-major.1
+help2man -N --no-discard-stderr --version-string=%{version} %{buildroot}/%{_bindir}/ursa-major > %{buildroot}/%{_mandir}/man1/ursa-major.1
 for cmd in show-config check-config remove-module add-module add-tag; do
-    help2man -N --version-string=%{version} "%{buildroot}/%{_bindir}/ursa-major $cmd" > %{buildroot}/%{_mandir}/man1/ursa-major-${cmd}.1
+    help2man -N --no-discard-stderr --version-string=%{version} "%{buildroot}/%{_bindir}/ursa-major $cmd" > %{buildroot}/%{_mandir}/man1/ursa-major-${cmd}.1
 done
 
 
@@ -179,6 +185,24 @@ py.test
 
 
 %changelog
+* Wed Mar 27 2019 Chenxiong Qi <cqi@redhat.com> - 0.2.2-1
+- For adding tag, allow filtering on buildrequires to find out koji_tags from tag inheritance (Chenxiong Qi)
+
+* Wed Mar 20 2019 Chenxiong Qi <cqi@redhat.com> - 0.2.1-1
+- Make setup_method/teardown_method compatible with newer version of pytest (Chenxiong Qi)
+- Add missing file CHANGELOG.rst to sdist package (Chenxiong Qi)
+
+* Wed Mar 20 2019 Chenxiong Qi <cqi@redhat.com> - 0.2.0-1
+- Add tests for AddModuleHandler methods (Chenxiong Qi)
+- Avoid long modulemd embedded into fake data for tests (Chenxiong Qi)
+- Fixes according to review comments (Chenxiong Qi)
+- Command check-config supports filtering modules on buildrequires (Chenxiong Qi)
+- Command add-module supports buildrequires now (Chenxiong Qi)
+- Command remove-module supports filtering modules on buildrequires (Chenxiong Qi)
+- Allow passing buildrequires to MBS.get_modules_with_requires (Chenxiong Qi)
+- Reword remove-module help and --tag option help text (Chenxiong Qi)
+- Allow filtering on buildrequires (Chenxiong Qi)
+
 * Mon Dec 03 2018 Qixiang Wan <qwan@redhat.com> - 0.1.1-4
 - build can be scheduled to i386 arch, include ix86
 
