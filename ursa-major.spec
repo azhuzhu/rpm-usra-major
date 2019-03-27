@@ -5,7 +5,7 @@
 %endif
 
 Name:       ursa-major
-Version:    0.2.1
+Version:    0.2.2
 Release:    1%{?dist}
 Summary:    A utility for working with module's koji tags in koji's tag inheritance.
 
@@ -185,6 +185,10 @@ py.test
 
 
 %changelog
+* Wed Mar 27 2019 Chenxiong Qi <cqi@redhat.com> - 0.2.2-1
+- For adding tag, allow filtering on buildrequires to find out koji_tags from tag inheritance (Chenxiong Qi)
+
+
 * Wed Mar 20 2019 Chenxiong Qi <cqi@redhat.com> - 0.2.1-1
 - Make setup_method/teardown_method compatible with newer version of pytest (Chenxiong Qi)
 - Add missing file CHANGELOG.rst to sdist package (Chenxiong Qi)
