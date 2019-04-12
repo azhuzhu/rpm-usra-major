@@ -6,7 +6,7 @@
 
 Name:       ursa-major
 Version:    0.2.2
-Release:    1%{?dist}
+Release:    2%{?dist}
 Summary:    A utility for working with module's koji tags in koji's tag inheritance.
 
 Group:      Development/Tools
@@ -81,6 +81,7 @@ Requires:       python3-koji
 Requires:       python3-six
 Requires:       python3-requests
 Requires:       python3-jinja2
+Requires:       python3-setuptools
 %else
 Requires:       python2-koji
 %if 0%{?rhel} && 0%{?rhel} <= 7
@@ -90,6 +91,7 @@ Requires:       python-six
 Requires:       python-requests
 Requires:       python-jinja2
 Requires:       python-futures
+Requires:       python-setuptools
 %else
 Requires:       python2-gobject-base
 Requires:       python2-cairo
@@ -97,6 +99,7 @@ Requires:       python2-six
 Requires:       python2-requests
 Requires:       python2-jinja2
 Requires:       python2-futures
+Requires:       python2-setuptools
 %endif
 %endif
 
@@ -185,6 +188,9 @@ py.test
 
 
 %changelog
+* Fri Apr 12 2019 Chenxiong Qi <cqi@redhat.com> - 0.2.2-2
+- Add missing python-setuptools in requires
+
 * Wed Mar 27 2019 Chenxiong Qi <cqi@redhat.com> - 0.2.2-1
 - For adding tag, allow filtering on buildrequires to find out koji_tags from tag inheritance (Chenxiong Qi)
 
