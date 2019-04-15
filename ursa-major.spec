@@ -1,12 +1,12 @@
 %if 0%{?fedora}
 # we have some koji hubs doesn't support Python3 with kerberos auth
 # at this moment, so we build with Python2 for all platforms now
-%global with_python3 0
+%global with_python3 1
 %endif
 
 Name:       ursa-major
 Version:    0.2.2
-Release:    2%{?dist}
+Release:    3%{?dist}
 Summary:    A utility for working with module's koji tags in koji's tag inheritance.
 
 Group:      Development/Tools
@@ -188,6 +188,9 @@ py.test
 
 
 %changelog
+* Mon Apr 15 2019 Chenxiong Qi <cqi@redhat.com> - 0.2.2-3
+- Build Python 3 package for Fedora and Python 2 for EL
+
 * Fri Apr 12 2019 Chenxiong Qi <cqi@redhat.com> - 0.2.2-2
 - Add missing python-setuptools in requires
 
