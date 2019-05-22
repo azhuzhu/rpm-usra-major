@@ -5,8 +5,8 @@
 %endif
 
 Name:       ursa-major
-Version:    0.2.2
-Release:    3%{?dist}
+Version:    0.3.1
+Release:    1%{?dist}
 Summary:    A utility for working with module's koji tags in koji's tag inheritance.
 
 Group:      Development/Tools
@@ -122,8 +122,6 @@ to talk with Fedora's stage instances (Koji, MBS).
 %setup -q
 
 %if 0%{?rhel} && 0%{?rhel} <= 7
-# workaround for no egg-info
-sed -i '/pycairo/d' requirements.txt
 # old setuptools not support environment marker
 sed -i 's/futures.*/futures/' requirements.txt
 %endif
@@ -188,6 +186,10 @@ py.test
 
 
 %changelog
+* Tue May 21 2019 Qixiang Wan <qwan@redhat.com> - 0.3.1-1
+- Not check requires/buildrequires for existing koji tags (Qixiang Wan)
+- Updating existing inheritance instead of removing and adding (Qixiang Wan)
+
 * Mon Apr 15 2019 Chenxiong Qi <cqi@redhat.com> - 0.2.2-3
 - Build Python 3 package for Fedora and Python 2 for EL
 
