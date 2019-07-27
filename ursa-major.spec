@@ -6,7 +6,7 @@
 
 Name:       ursa-major
 Version:    0.3.1
-Release:    1%{?dist}
+Release:    2%{?dist}
 Summary:    A utility for working with module's koji tags in koji's tag inheritance.
 
 Group:      Development/Tools
@@ -186,6 +186,9 @@ py.test
 
 
 %changelog
+* Sat Jul 27 2019 Fedora Release Engineering <releng@fedoraproject.org> - 0.3.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
+
 * Tue May 21 2019 Qixiang Wan <qwan@redhat.com> - 0.3.1-1
 - Not check requires/buildrequires for existing koji tags (Qixiang Wan)
 - Updating existing inheritance instead of removing and adding (Qixiang Wan)
