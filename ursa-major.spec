@@ -9,7 +9,6 @@ Version:    0.3.1
 Release:    2%{?dist}
 Summary:    A utility for working with module's koji tags in koji's tag inheritance.
 
-Group:      Development/Tools
 License:    MIT
 URL:        https://pagure.io/ursa-major
 Source0:    https://files.pythonhosted.org/packages/source/u/%{name}/%{name}-%{version}.tar.gz
