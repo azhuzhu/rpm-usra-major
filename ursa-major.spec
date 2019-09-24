@@ -6,7 +6,7 @@
 
 Name:       ursa-major
 Version:    0.3.1
-Release:    3%{?dist}
+Release:    4%{?dist}
 Summary:    A utility for working with module's koji tags in koji's tag inheritance.
 
 License:    MIT
@@ -71,18 +71,19 @@ Requires:  libmodulemd
 Requires:       gobject-introspection
 Requires:       krb5-workstation
 Requires:       koji
-Requires:       m2crypto
 
 %if 0%{?with_python3}
 Requires:       python3-gobject-base
 Requires:       python3-cairo
 Requires:       python3-koji
+Requires:       python3-m2crypto
 Requires:       python3-six
 Requires:       python3-requests
 Requires:       python3-jinja2
 Requires:       python3-setuptools
 %else
 Requires:       python2-koji
+Requires:       m2crypto
 %if 0%{?rhel} && 0%{?rhel} <= 7
 Requires:       python-gobject-base
 Requires:       pycairo
@@ -185,6 +186,9 @@ py.test
 
 
 %changelog
+* Tue Sep 24 2019 Miro Hrončok <mhroncok@redhat.com> - 0.3.1-4
+- Require correct version of m2crypto
+
 * Mon Aug 19 2019 Miro Hrončok <mhroncok@redhat.com> - 0.3.1-3
 - Rebuilt for Python 3.8
 
