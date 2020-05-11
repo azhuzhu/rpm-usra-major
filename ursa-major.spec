@@ -104,7 +104,7 @@ Requires:       python2-setuptools
 %endif
 
 # Need brewkoji.conf
-Requires:       brewkoji
+Recommends:     brewkoji
 
 
 %description
@@ -117,7 +117,7 @@ Summary:        A utility for working with module's koji tags in koji's tag inhe
 Requires:       %{name} = %{version}-%{release}
 
 # Need brewkoji-stage.conf
-Requires:       brewkoji-stage
+Recommends:     brewkoji-stage
 
 %description    -n ursa-major-stage
 The ursa-major-stage package contains script and configurations for Ursa-Major
