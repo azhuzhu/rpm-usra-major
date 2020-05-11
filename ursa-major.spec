@@ -6,7 +6,7 @@
 
 Name:       ursa-major
 Version:    0.4.1
-Release:    1%{?dist}
+Release:    2%{?dist}
 Summary:    A utility for working with module's koji tags in koji's tag inheritance.
 
 Group:      Development/Tools
@@ -193,6 +193,10 @@ done
 
 
 %changelog
+* Mon May 11 2020 Yu Ming Zhu <yzhu@redhat.com> - 0.4.1-2
+- Requires python3-m2crypto for python3
+- Recommends brew[-stage] instead of Requires
+
 * Tue Feb 11 2020 Qixiang Wan <qwan@redhat.com> - 0.4.1-1
 - Remove updating koji inheritance ability from add-module and remove-module
 
