@@ -72,18 +72,19 @@ Requires:  libmodulemd < 2
 Requires:       gobject-introspection
 Requires:       krb5-workstation
 Requires:       koji
-Requires:       m2crypto
 
 %if 0%{?with_python3}
 Requires:       python3-gobject-base
 Requires:       python3-cairo
 Requires:       python3-koji
+Requires:       python3-m2crypto
 Requires:       python3-six
 Requires:       python3-requests
 Requires:       python3-jinja2
 Requires:       python3-setuptools
 %else
 Requires:       python2-koji
+Requires:       m2crypto
 %if 0%{?rhel} && 0%{?rhel} <= 7
 Requires:       python-gobject-base
 Requires:       pycairo
